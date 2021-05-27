@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
     color: 'white',
   },
   img: {
-    maxHeight: '700px',
+    maxHeight: 'calc(100vh - 200px)',
     maxWidth: '100vw',
   },
 }));
