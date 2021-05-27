@@ -5,8 +5,9 @@ import Register from './Pages/Register';
 import Main from './Pages/Main';
 
 import { useAuth } from './hooks/useAuth';
+import Base from './Pages/Base';
+import Error404 from './Pages/Error404';
 
-// eslint-disable-next-line react/prop-types
 function CustomRoute({ isPrivate, children, ...rest }) {
   const auth = useAuth();
 
@@ -27,9 +28,15 @@ export default function Routes() {
       <CustomRoute path="/register">
         <Register />
       </CustomRoute>
-      <CustomRoute isPrivate exact path="/">
-        <Main />
-      </CustomRoute>
+
+      <Base>
+        <CustomRoute isPrivate exact path="/">
+          <Main />
+        </CustomRoute>
+        <CustomRoute isPrivate path="*">
+          <Error404 />
+        </CustomRoute>
+      </Base>
     </Switch>
   );
 }

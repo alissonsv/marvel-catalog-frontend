@@ -8,8 +8,13 @@ function App() {
   const theme = createMuiTheme({
     palette: {
       background: {
-        default: '#202020',
+        default: '#151515',
+        light: '#212121',
       },
+      primary: {
+        main: '#d32f2f',
+      },
+      divider: '#393939',
     },
   });
 
