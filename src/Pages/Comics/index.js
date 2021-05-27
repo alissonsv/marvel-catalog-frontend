@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Pagination, Skeleton } from '@material-ui/lab';
 import { useAuth } from '../../hooks/useAuth';
 import CharacterItem from '../../Components/characterItem';
+import { getFavoriteComics, setFavoriteComics } from '../../utils/favorites';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -38,7 +39,6 @@ export default function Comics() {
   const auth = useAuth();
 
   const [comics, setComics] = useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [favorites, setFavorites] = useState([]);
   const [page, setPage] = useState(1);
   const [numPages, setNumPages] = useState(1);
@@ -63,9 +63,27 @@ export default function Comics() {
     setLoading(false);
   }
 
+  useEffect(async () => {
+    const favoriteComics = await getFavoriteComics(auth.user.token);
+    setFavorites(favoriteComics);
+  }, []);
+
   useEffect(() => {
     getComics();
   }, [page]);
+
+  async function handleFavoriteClick(id) {
+    let favoritesCopy = [...favorites];
+
+    if (favoritesCopy.includes(id)) {
+      favoritesCopy = favoritesCopy.filter((favorite) => favorite !== id);
+    } else {
+      favoritesCopy = [...favoritesCopy, id];
+    }
+
+    favoritesCopy = await setFavoriteComics(auth.user.token, favoritesCopy);
+    setFavorites(favoritesCopy);
+  }
 
   function handlePageChange(_e, value) {
     setPage(value);
@@ -84,6 +102,8 @@ export default function Comics() {
               key={comic.id}
               name={comic.title}
               thumbnail={comic.thumbnail}
+              checked={favorites.includes(comic.id)}
+              favoriteClick={handleFavoriteClick}
             />
           ))}
       </div>

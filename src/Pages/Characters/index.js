@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Pagination, Skeleton } from '@material-ui/lab';
 import { useAuth } from '../../hooks/useAuth';
 import CharacterItem from '../../Components/characterItem';
+import { getFavoriteCharacters, setFavoriteCharacters } from '../../utils/favorites';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -38,6 +39,7 @@ export default function Characters() {
   const auth = useAuth();
 
   const [characters, setCharacters] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [page, setPage] = useState(1);
   const [numPages, setNumPages] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -65,6 +67,24 @@ export default function Characters() {
     getCharacters();
   }, [page]);
 
+  useEffect(async () => {
+    const favoriteCharacters = await getFavoriteCharacters(auth.user.token);
+    setFavorites(favoriteCharacters);
+  }, []);
+
+  async function handleFavoriteClick(id) {
+    let favoritesCopy = [...favorites];
+
+    if (favoritesCopy.includes(id)) {
+      favoritesCopy = favoritesCopy.filter((favorite) => favorite !== id);
+    } else {
+      favoritesCopy = [...favoritesCopy, id];
+    }
+
+    favoritesCopy = await setFavoriteCharacters(auth.user.token, favoritesCopy);
+    setFavorites(favoritesCopy);
+  }
+
   function handlePageChange(_e, value) {
     setPage(value);
   }
@@ -82,6 +102,8 @@ export default function Characters() {
               key={character.id}
               name={character.name}
               thumbnail={character.thumbnail}
+              checked={favorites.includes(character.id)}
+              favoriteClick={handleFavoriteClick}
             />
           ))}
       </div>

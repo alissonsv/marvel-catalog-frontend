@@ -58,22 +58,20 @@ function useProvideAuth() {
       .catch((e) => e);
   };
 
-  const logout = () => {
+  const logout = async () => {
     const token = JSON.parse(localStorage.getItem('user'))?.token;
 
-    fetch('/api/user/logout', {
+    await fetch('/api/user/logout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: `Bearer ${token}`,
       },
-    }).then((response) => {
-      if (response.status === 200) {
-        localStorage.removeItem('user');
-        setUser(null);
-        history.push('/login');
-      }
     });
+
+    localStorage.removeItem('user');
+    setUser(null);
+    history.push('/login');
   };
 
   // Return the user object and auth methods
