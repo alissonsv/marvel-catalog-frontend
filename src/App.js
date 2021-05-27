@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { createMuiTheme, CssBaseline, ThemeProvider } from '@material-ui/core';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { ProvideAuth } from './hooks/useAuth';
+
+import Routes from './routes';
 
 function App() {
+  const theme = createMuiTheme({
+    palette: {
+      background: {
+        default: '#202020',
+      },
+    },
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <ProvideAuth>
+        <Router>
+          <Routes />
+        </Router>
+      </ProvideAuth>
+    </ThemeProvider>
   );
 }
 
