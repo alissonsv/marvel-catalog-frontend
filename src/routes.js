@@ -7,6 +7,7 @@ import { useAuth } from './hooks/useAuth';
 import Base from './Pages/Base';
 import Error404 from './Pages/Error404';
 import Characters from './Pages/Characters';
+import Comics from './Pages/Comics';
 
 function CustomRoute({ isPrivate, children, ...rest }) {
   const auth = useAuth();
@@ -37,6 +38,12 @@ export default function Routes() {
       <CustomRoute isPrivate exact path="/characters/">
         <Base>
           <Characters />
+        </Base>
+      </CustomRoute>
+
+      <CustomRoute isPrivate exact path="/comics/">
+        <Base>
+          <Comics />
         </Base>
       </CustomRoute>
 
