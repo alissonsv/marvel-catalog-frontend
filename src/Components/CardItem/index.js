@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function characterItem({
+export default function CardItem({
   id, name, thumbnail, checked, favoriteClick,
 }) {
   const classes = useStyles();

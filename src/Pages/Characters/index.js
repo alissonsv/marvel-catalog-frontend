@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useEffect, useState } from 'react';
 import { Pagination, Skeleton } from '@material-ui/lab';
 import { useAuth } from '../../hooks/useAuth';
-import CharacterItem from '../../Components/characterItem';
+import CardItem from '../../Components/CardItem';
 import { getFavoriteCharacters, setFavoriteCharacters } from '../../utils/favorites';
 
 const useStyles = makeStyles((theme) => ({
@@ -97,7 +97,7 @@ export default function Characters() {
         {loading
           ? <Skeleton className={classes.skeleton} variant="rect" width={250} height={220} />
           : characters.map((character) => (
-            <CharacterItem
+            <CardItem
               id={character.id}
               key={character.id}
               name={character.name}
