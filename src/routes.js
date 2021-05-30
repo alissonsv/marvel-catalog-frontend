@@ -10,6 +10,7 @@ import Characters from './Pages/Characters';
 import Comics from './Pages/Comics';
 import Favorites from './Pages/Favorites';
 import CharacterDetail from './Pages/CharacterDetail';
+import ComicDetail from './Pages/ComicDetail';
 
 function CustomRoute({ isPrivate, children, ...rest }) {
   const auth = useAuth();
@@ -52,6 +53,12 @@ export default function Routes() {
       <CustomRoute isPrivate path="/characters/">
         <Base>
           <Characters />
+        </Base>
+      </CustomRoute>
+
+      <CustomRoute isPrivate path="/comics/:id">
+        <Base>
+          <ComicDetail />
         </Base>
       </CustomRoute>
 
