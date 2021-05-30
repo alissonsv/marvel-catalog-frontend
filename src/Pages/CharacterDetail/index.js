@@ -106,7 +106,7 @@ export default function CharacterDetail() {
           }
 
           {
-            charComics && (
+            charComics.length > 0 && (
               <div className={classes.comics}>
 
                 <h2>Comics:</h2>
