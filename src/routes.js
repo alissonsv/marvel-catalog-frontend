@@ -9,6 +9,7 @@ import Error404 from './Pages/Error404';
 import Characters from './Pages/Characters';
 import Comics from './Pages/Comics';
 import Favorites from './Pages/Favorites';
+import CharacterDetail from './Pages/CharacterDetail';
 
 function CustomRoute({ isPrivate, children, ...rest }) {
   const auth = useAuth();
@@ -39,6 +40,12 @@ export default function Routes() {
       <CustomRoute isPrivate path="/favorites">
         <Base>
           <Favorites />
+        </Base>
+      </CustomRoute>
+
+      <CustomRoute isPrivate path="/characters/:id">
+        <Base>
+          <CharacterDetail />
         </Base>
       </CustomRoute>
 
