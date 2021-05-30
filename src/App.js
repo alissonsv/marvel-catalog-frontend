@@ -1,5 +1,4 @@
 import { createMuiTheme, CssBaseline, ThemeProvider } from '@material-ui/core';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { ProvideAuth } from './hooks/useAuth';
 
 import Routes from './routes';
@@ -31,9 +30,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <ProvideAuth>
-        <Router>
-          <Routes />
-        </Router>
+        <Routes />
       </ProvideAuth>
     </ThemeProvider>
   );
