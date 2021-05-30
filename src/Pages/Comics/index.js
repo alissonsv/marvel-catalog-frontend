@@ -101,6 +101,7 @@ export default function Comics() {
               thumbnail={comic.thumbnail}
               checked={favorites.includes(comic.id)}
               favoriteClick={handleFavoriteClick}
+              type="comic"
             />
           ))}
       </div>

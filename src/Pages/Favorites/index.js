@@ -83,6 +83,7 @@ export default function Favorites() {
                 key={character.id}
                 checked={characters.some((item) => item.id === character.id)}
                 favoriteClick={handleCharacterFavoriteClick}
+                type="character"
               />
             ))
         }
@@ -103,6 +104,7 @@ export default function Favorites() {
                 key={comic.id}
                 checked={comics.some((item) => item.id === comic.id)}
                 favoriteClick={handleComicsFavoriteClick}
+                type="comic"
               />
             ))
         }

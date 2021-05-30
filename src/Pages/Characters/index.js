@@ -101,6 +101,7 @@ export default function Characters() {
               thumbnail={character.thumbnail}
               checked={favorites.includes(character.id)}
               favoriteClick={handleFavoriteClick}
+              type="character"
             />
           ))}
       </div>

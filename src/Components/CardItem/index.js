@@ -2,6 +2,7 @@ import {
   Card, CardActionArea, CardContent, CardMedia, Checkbox, makeStyles, Typography,
 } from '@material-ui/core';
 import { Favorite, FavoriteBorder } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -15,9 +16,18 @@ const useStyles = makeStyles({
 });
 
 export default function CardItem({
-  id, name, thumbnail, checked, favoriteClick,
+  id, name, thumbnail, checked, favoriteClick, type,
 }) {
   const classes = useStyles();
+  const history = useHistory();
+
+  function handleRedirect() {
+    if (type === 'character') {
+      history.push(`/characters/${id}`);
+    } else {
+      history.push(`/comics/${id}`);
+    }
+  }
 
   return (
     <Card className={classes.root}>
@@ -26,7 +36,7 @@ export default function CardItem({
           className={classes.media}
           image={`${thumbnail.path}.${thumbnail.extension}`}
           title={name}
-          onClick={() => alert(id)}
+          onClick={handleRedirect}
         />
       </CardActionArea>
       <CardContent>
