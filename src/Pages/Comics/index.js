@@ -1,5 +1,8 @@
-import { Container } from '@material-ui/core';
+import {
+  Container, IconButton, InputBase, Paper,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import SearchIcon from '@material-ui/icons/Search';
 import { useEffect, useState } from 'react';
 import { Pagination, Skeleton } from '@material-ui/lab';
 import { useAuth } from '../../hooks/useAuth';
@@ -10,6 +13,15 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
+  },
+  formSearch: {
+    display: 'flex',
+    maxWidth: '250px',
+    margin: '10px',
+    backgroundColor: '#333',
+  },
+  searchInput: {
+    marginLeft: '5px',
   },
   comics: {
     display: 'flex',
@@ -37,6 +49,7 @@ export default function Comics() {
 
   const [comics, setComics] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [numPages, setNumPages] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -45,7 +58,7 @@ export default function Comics() {
     setLoading(true);
 
     const offset = (page - 1) * 20;
-    const request = await fetch(`/api/comics?offset=${offset}`, {
+    const request = await fetch(`/api/comics?offset=${offset}&titleStartsWith=${search}`, {
       headers: {
         Authorization: `Bearer ${auth.user.token}`,
       },
@@ -69,6 +82,11 @@ export default function Comics() {
     getComics();
   }, [page]);
 
+  function handleSearchSubmit(e) {
+    e.preventDefault();
+    getComics();
+  }
+
   async function handleFavoriteClick(id) {
     let favoritesCopy = [...favorites];
 
@@ -89,6 +107,19 @@ export default function Comics() {
   return (
     <Container className={classes.container}>
       <h1>Comics</h1>
+
+      <Paper component="form" className={classes.formSearch} onSubmit={handleSearchSubmit}>
+        <InputBase
+          className={classes.searchInput}
+          name="name"
+          placeholder="Search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <IconButton type="submit" aria-label="search">
+          <SearchIcon />
+        </IconButton>
+      </Paper>
 
       <div className={classes.comics}>
         {loading
