@@ -6,8 +6,6 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: '24px',
-    color: 'white',
   },
   img: {
     maxHeight: 'calc(100vh - 200px)',

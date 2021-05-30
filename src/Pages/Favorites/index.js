@@ -12,11 +12,6 @@ import {
 } from '../../utils/favorites';
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    color: 'white',
-    paddingTop: '24px',
-    paddingBottom: '24px',
-  },
   items: {
     display: 'flex',
     flexWrap: 'wrap',

@@ -16,6 +16,15 @@ function App() {
       },
       divider: '#393939',
     },
+    overrides: {
+      MuiContainer: {
+        root: {
+          paddingTop: '24px',
+          paddingBottom: '24px',
+          color: 'white',
+        },
+      },
+    },
   });
 
   return (

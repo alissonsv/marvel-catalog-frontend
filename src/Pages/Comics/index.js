@@ -10,9 +10,6 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    paddingTop: '24px',
-    paddingBottom: '24px',
-    color: 'white',
   },
   comics: {
     display: 'flex',
