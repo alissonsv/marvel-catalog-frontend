@@ -1,5 +1,6 @@
-export async function getFavoriteComics(token) {
-  const response = await fetch('/api/user/comics', {
+export async function getFavoriteComics(token, details = false) {
+  const url = details ? '/api/user/comics/details' : 'api/user/comics';
+  const response = await fetch(url, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -9,8 +10,9 @@ export async function getFavoriteComics(token) {
   return comics;
 }
 
-export async function getFavoriteCharacters(token) {
-  const response = await fetch('/api/user/characters', {
+export async function getFavoriteCharacters(token, details = false) {
+  const url = details ? '/api/user/characters/details' : 'api/user/characters';
+  const response = await fetch(url, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
