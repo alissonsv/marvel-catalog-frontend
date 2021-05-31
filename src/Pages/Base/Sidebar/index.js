@@ -44,9 +44,9 @@ export default function Sidebar({ open, close }) {
 
   const navLink = (
     <List component="nav" className={classes.navLink}>
-      <ListItem button component={NavLink} to="/favorites" activeClassName={classes.selected}>Favorites</ListItem>
-      <ListItem button component={NavLink} to="/characters" activeClassName={classes.selected}>Characters</ListItem>
-      <ListItem button component={NavLink} to="/comics" activeClassName={classes.selected}>Comics</ListItem>
+      <ListItem button component={NavLink} onClick={close} to="/favorites" activeClassName={classes.selected}>Favorites</ListItem>
+      <ListItem button component={NavLink} onClick={close} to="/characters" activeClassName={classes.selected}>Characters</ListItem>
+      <ListItem button component={NavLink} onClick={close} to="/comics" activeClassName={classes.selected}>Comics</ListItem>
     </List>
   );
 
