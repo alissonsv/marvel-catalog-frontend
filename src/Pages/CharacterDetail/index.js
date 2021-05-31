@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CharacterDetail() {
   const classes = useStyles();
   const auth = useAuth();
+  const host = process.env.REACT_APP_API_HOST;
   const { id } = useParams();
 
   const [character, setCharacter] = useState(null);
@@ -50,7 +51,7 @@ export default function CharacterDetail() {
     setLoadingComics(true);
 
     const offset = (page - 1) * 20;
-    const request = await fetch(`/api/characters/${id}/comics?offset=${offset}`, {
+    const request = await fetch(`${host}/api/characters/${id}/comics?offset=${offset}`, {
       headers: {
         Authorization: `Bearer ${auth.user.token}`,
       },
@@ -65,7 +66,7 @@ export default function CharacterDetail() {
   }
 
   useEffect(async () => {
-    const response = await fetch(`/api/characters/${id}`, {
+    const response = await fetch(`${host}/api/characters/${id}`, {
       headers: {
         Authorization: `Bearer ${auth.user.token}`,
       },

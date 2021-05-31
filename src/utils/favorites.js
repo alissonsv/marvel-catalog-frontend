@@ -1,5 +1,7 @@
+const host = process.env.REACT_APP_API_HOST;
+
 export async function getFavoriteComics(token, details = false) {
-  const url = details ? '/api/user/comics/details' : 'api/user/comics';
+  const url = details ? `${host}/api/user/comics/details` : `${host}/api/user/comics`;
   const response = await fetch(url, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -11,7 +13,7 @@ export async function getFavoriteComics(token, details = false) {
 }
 
 export async function getFavoriteCharacters(token, details = false) {
-  const url = details ? '/api/user/characters/details' : 'api/user/characters';
+  const url = details ? `${host}/api/user/characters/details` : `${host}/api/user/characters`;
   const response = await fetch(url, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -23,7 +25,7 @@ export async function getFavoriteCharacters(token, details = false) {
 }
 
 export async function setFavoriteComics(token, comics) {
-  const response = await fetch('/api/user/comics', {
+  const response = await fetch(`${host}/api/user/comics`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -37,7 +39,7 @@ export async function setFavoriteComics(token, comics) {
 }
 
 export async function setFavoriteCharacters(token, characters) {
-  const response = await fetch('/api/user/characters', {
+  const response = await fetch(`${host}/api/user/characters`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',

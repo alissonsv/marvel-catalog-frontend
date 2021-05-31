@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Characters() {
   const classes = useStyles();
   const auth = useAuth();
+  const host = process.env.REACT_APP_API_HOST;
 
   const [characters, setCharacters] = useState([]);
   const [favorites, setFavorites] = useState([]);
@@ -57,7 +58,7 @@ export default function Characters() {
     setLoading(true);
 
     const offset = (page - 1) * 20;
-    const request = await fetch(`/api/characters?offset=${offset}&nameStartsWith=${search}`, {
+    const request = await fetch(`${host}/api/characters?offset=${offset}&nameStartsWith=${search}`, {
       headers: {
         Authorization: `Bearer ${auth.user.token}`,
       },

@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Comics() {
   const classes = useStyles();
-
+  const host = process.env.REACT_APP_API_HOST;
   const auth = useAuth();
 
   const [comics, setComics] = useState([]);
@@ -58,7 +58,7 @@ export default function Comics() {
     setLoading(true);
 
     const offset = (page - 1) * 20;
-    const request = await fetch(`/api/comics?offset=${offset}&titleStartsWith=${search}`, {
+    const request = await fetch(`${host}/api/comics?offset=${offset}&titleStartsWith=${search}`, {
       headers: {
         Authorization: `Bearer ${auth.user.token}`,
       },

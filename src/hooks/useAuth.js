@@ -10,12 +10,13 @@ export const useAuth = () => useContext(authContext);
 // Provider hook that creates auth object and handles state
 function useProvideAuth() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+  const host = process.env.REACT_APP_API_HOST;
   const history = useHistory();
 
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
   const login = (email, password) => {
-    fetch('/api/user/login', {
+    fetch(`${host}/api/user/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -37,7 +38,7 @@ function useProvideAuth() {
   };
 
   const register = (email, password) => {
-    fetch('/api/user', {
+    fetch(`${host}/api/user`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -61,7 +62,7 @@ function useProvideAuth() {
   const logout = async () => {
     const token = JSON.parse(localStorage.getItem('user'))?.token;
 
-    await fetch('/api/user/logout', {
+    await fetch(`${host}/api/user/logout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
